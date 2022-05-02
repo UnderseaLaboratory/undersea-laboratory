@@ -25,7 +25,9 @@ __status__ = "Production"
 # import libraries
 import os
 import glob
+import curses
 from time import *
+from time import sleep
 
 # load 1-wire comm kernel
 os.system('modprobe w1-gpio')
@@ -61,4 +63,32 @@ def getTemp():
 	temp_f = temp_c * 9.0 / 5.0 + 32.0
 	
 	return temp_c, temp_f	
+	
+# view/debug sensor via terminal
+def displayTerminal():
+	while True:
+		temp_c, temp_f = getTemp()
+	
+		print("{0}, {1}, {2}, {3}\n".format("DATE: "+ strftime("%Y-%m-%d"), "TIME: " + strftime("%H:%M:%S"), str(temp_c) + " C", str(temp_f) + " F"))
+		sleep(1)
+
+# view/debug sensor via curses
+def displayCurses():
+	stdscreen = curses.initscr()
+	curses.curs_set(0)
+	
+	key = 0
+	
+	while (key != curses.KEY_BACKSPACE):
+		temp_c, temp_f = getTemp()
+			
+		stdscreen.addstr(0, 0, "DS18B20 (C): ")
+		stdscreen.addstr(0, 15, str(temp_c))
+		
+		stdscreen.addstr(1, 0, "DS18B20 (F): ")
+		stdscreen.addstr(1, 15, str(temp_f))
+		
+		stdscreen.refresh()
+		stdscreen.nodelay(1)
+		key = stdscreen.getch()
 	

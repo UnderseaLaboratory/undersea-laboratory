@@ -70,25 +70,3 @@ def displayTerminal():
 		temp_c, temp_f = getTemp()
 	
 		print("{0}, {1}, {2}, {3}\n".format("DATE: "+ strftime("%Y-%m-%d"), "TIME: " + strftime("%H:%M:%S"), str(temp_c) + " C", str(temp_f) + " F"))
-		sleep(1)
-
-# view/debug sensor via curses
-def displayCurses():
-	stdscreen = curses.initscr()
-	curses.curs_set(0)
-	
-	key = 0
-	
-	while (key != curses.KEY_BACKSPACE):
-		temp_c, temp_f = getTemp()
-			
-		stdscreen.addstr(0, 0, "DS18B20 (C): ")
-		stdscreen.addstr(0, 15, str(temp_c))
-		
-		stdscreen.addstr(1, 0, "DS18B20 (F): ")
-		stdscreen.addstr(1, 15, str(temp_f))
-		
-		stdscreen.refresh()
-		stdscreen.nodelay(1)
-		key = stdscreen.getch()
-	

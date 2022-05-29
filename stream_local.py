@@ -2,14 +2,14 @@
 # -*- coding: utf-8 -*-
 
 ########################################################################
-##               		{FFMPEG Command Script}                       ##
+##                  	{FFMPEG UDP Command Script}                   ##
 ########################################################################
 """
 
 Description: This script builds and runs the FFMPEG command needed to
-			 stream to YouTube. The command parameters are described and
-			 only intended to work with the Undersea Laboratory camera
-			 setup. 
+			 stream to a client device on the same network. The command 
+			 parameters are described and only intended to work with the
+			 Undersea Laboratory camera setup. 
 
 """
 ########################################################################

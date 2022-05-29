@@ -51,6 +51,7 @@ def setCommand():
 	#params_dict["audio_codec"] = "mp2"
 	
 	# hydrophone input
+	# type command aplay -l to check card number
 	params_dict["hydrophone_source"] = "plughw:1,0"
 	
 	params_dict["hydrophone_interface"] = "alsa"
@@ -104,13 +105,53 @@ def setCommand():
 	
 	# flip screen (horizontal)
 	params_dict["flip_horizontal"] = "hflip"
-
 	
 	# send output to rtmp server (youtube)
 	# replace with your livestream key!
 	params_dict["youtube"] = "rtmp://a.rtmp.youtube.com/live2/m1qh-wagz-bm0p-axdh-6wak"
 	
-	params_dict["filters"] = params_dict["scale"] + "," +  params_dict["flip_vertical"] + "," +  params_dict["flip_horizontal"]
+	# date display (strftime)
+	params_dict["time"] = "drawtext=expansion=strftime:fontfile=/usr/share/fonts/truetype/freefont/FreeSans.ttf:fontsize=24:fontcolor=white:shadowx=1:shadowy=1:text="'%r'":x=5:y=32"
+	
+	# time display (strftime)
+	params_dict["date"] = "drawtext=expansion=strftime:fontfile=/usr/share/fonts/truetype/freefont/FreeSans.ttf:fontsize=24:fontcolor=white:shadowx=1:shadowy=1:text="'%A\\\\\, %b %-d\\\\\, %Y'":x=5:y=5"
+	
+	# ds18b20 temperature display (.txt file)
+	params_dict["temp_label"] = "drawtext=fontfile=/usr/share/fonts/truetype/freefont/FreeSans.ttf:fontsize=24:fontcolor=white:shadowx=1:shadowy=1:text="'Temperature\\\\\: '":x=5:y=691"
+	params_dict["temp_data"] = "drawtext=fontfile=/usr/share/fonts/truetype/freefont/FreeSans.ttf:fontsize=24:fontcolor=white:shadowx=1:shadowy=1:textfile=/mnt/usb/Sensor Data/DS18B20/ds18b20_temp_c.txt:reload=1:x=155:y=692"
+	
+	# turbidity display (TEMPLATE)
+	params_dict["turb_label"] = "drawtext=fontfile=/usr/share/fonts/truetype/freefont/FreeSans.ttf:fontsize=24:fontcolor=white:shadowx=1:shadowy=1:text="'Turbidity\\\\\:          NTU'":x=275:y=691"
+	params_dict["turb_data"] = "drawtext=fontfile=/usr/share/fonts/truetype/freefont/FreeSans.ttf:fontsize=24:fontcolor=white:shadowx=1:shadowy=1:text="'?'":x=400:y=691"
+	
+	# salinity display (TEMPLATE)
+	params_dict["sal_label"] = "drawtext=fontfile=/usr/share/fonts/truetype/freefont/FreeSans.ttf:fontsize=24:fontcolor=white:shadowx=1:shadowy=1:text="'Salinity\\\\\:          S/m'":x=540:y=691"
+	params_dict["sal_data"] = "drawtext=fontfile=/usr/share/fonts/truetype/freefont/FreeSans.ttf:fontsize=24:fontcolor=white:shadowx=1:shadowy=1:text="'?'":x=650:y=691"
+	
+	# IR status display
+	params_dict["ir_label"] = "drawtext=fontfile=/usr/share/fonts/truetype/freefont/FreeSans.ttf:fontsize=24:fontcolor=white:shadowx=1:shadowy=1:text="'IR\\\\\: '":x=1179:y=664"
+	params_dict["ir_data"] = "drawtext=fontfile=/usr/share/fonts/truetype/freefont/FreeSans.ttf:fontsize=24:fontcolor=white:shadowx=1:shadowy=1:textfile=/mnt/usb/Component Status/ir_filter.txt:reload=1:x=1225:y=664"
+	
+	# UV status display
+	params_dict["uv_label"] = "drawtext=fontfile=/usr/share/fonts/truetype/freefont/FreeSans.ttf:fontsize=24:fontcolor=white:shadowx=1:shadowy=1:text="'UV\\\\\: '":x=1171:y=691"
+	params_dict["uv_data"] = "drawtext=fontfile=/usr/share/fonts/truetype/freefont/FreeSans.ttf:fontsize=24:fontcolor=white:shadowx=1:shadowy=1:textfile=/mnt/usb/Component Status/uv_filter.txt:reload=1:x=1225:y=691"
+	
+	# LED1 status display
+	params_dict["led1_label"] = "drawtext=fontfile=/usr/share/fonts/truetype/freefont/FreeSans.ttf:fontsize=24:fontcolor=white:shadowx=1:shadowy=1:text="'LED1\\\\\: '":x=1145:y=610"
+	params_dict["led1_data"] = "drawtext=fontfile=/usr/share/fonts/truetype/freefont/FreeSans.ttf:fontsize=24:fontcolor=white:shadowx=1:shadowy=1:textfile=/mnt/usb/Component Status/light1.txt:reload=1:x=1225:y=610"
+
+	# LED2 status display
+	params_dict["led2_label"] = "drawtext=fontfile=/usr/share/fonts/truetype/freefont/FreeSans.ttf:fontsize=24:fontcolor=white:shadowx=1:shadowy=1:text="'LED2\\\\\: '":x=1145:y=637"
+	params_dict["led2_data"] = "drawtext=fontfile=/usr/share/fonts/truetype/freefont/FreeSans.ttf:fontsize=24:fontcolor=white:shadowx=1:shadowy=1:textfile=/mnt/usb/Component Status/light2.txt:reload=1:x=1225:y=637"
+	
+	# BCIT logo
+	params_dict["logo1"] = "drawtext=fontfile=/usr/share/fonts/truetype/freefont/FreeSansBold.ttf:fontsize=50:fontcolor=white:shadowx=1:shadowy=1:text="'BCIT'":x=1005:y=5"
+	params_dict["logo2"] = "drawtext=fontfile=/usr/share/fonts/truetype/freefont/FreeSansBold.ttf:fontsize=40.5:fontcolor=white:shadowx=1:shadowy=1:text="'|'":x=1127:y=5"
+	params_dict["logo3"] = "drawtext=fontfile=/usr/share/fonts/truetype/freefont/FreeSans.ttf:fontsize=19:fontcolor=white:shadowx=1:shadowy=1:text="'UNDERSEA'":x=1142:y=6"
+	params_dict["logo4"] = "drawtext=fontfile=/usr/share/fonts/truetype/freefont/FreeSans.ttf:fontsize=19:fontcolor=white:shadowx=1:shadowy=1:text="'LABORATORY'":x=1142:y=28"
+	
+	
+	params_dict["filters"] = params_dict["scale"] + "," +  params_dict["flip_vertical"] + "," +  params_dict["flip_horizontal"] + "," + params_dict["time"] + "," + params_dict["date"] + "," + params_dict["temp_label"] + "," + params_dict["temp_data"] + "," + params_dict["turb_label"] + "," + params_dict["sal_label"] + "," + params_dict["ir_label"] + "," + params_dict["ir_data"] + "," + params_dict["led1_label"] + "," + params_dict["led1_data"] + "," + params_dict["led2_label"] + "," + params_dict["led2_data"]  + "," + params_dict["uv_label"] + "," + params_dict["uv_data"] + "," + params_dict["logo1"] + "," + params_dict["logo2"] + "," + params_dict["logo3"] + "," + params_dict["logo4"]
 	return params_dict
 	
 def buildCommand():

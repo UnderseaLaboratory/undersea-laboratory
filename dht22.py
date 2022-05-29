@@ -26,29 +26,31 @@ __status__ = "Production"
 import adafruit_dht
 import board
 import time
+from time import *
 
 dht_device = adafruit_dht.DHT22(board.D17, use_pulseio=False)
 err_flag = 1
 
+temp_c = 0
+temp_f = 0
+hum = 0
+
 # extract and format temperature and humidity values
 def getTempHum():
-	err_flag = 1
+	global temp_c, temp_f, hum
+	try:
+		temp_c = dht_device.temperature
+		temp_f = temp_c * (9/5) + 32
+		hum = dht_device.humidity
 
-	while err_flag == 1:
-		try:
-			temp_c = dht_device.temperature
-			temp_f = temp_c * (9/5) + 32
-			hum = dht_device.humidity
-
-		except RuntimeError as error:
-			pass
-		except Exception as error:
-			dht_device.exit()
-		except TypeError as error:
-			dht_device.exit()
-		else:
-			err_flag = 0
-			return temp_c, temp_f, hum
+	except RuntimeError as error:
+		pass
+	except Exception as error:
+		dht_device.exit()
+	except TypeError as error:
+		dht_device.exit()
+	
+	return temp_c, temp_f, hum
 			
 # view/debug sensor via terminal
 def displayTerminal():
@@ -56,3 +58,4 @@ def displayTerminal():
 		temp_c, temp_f, hum = getTempHum()
 	
 		print("{0}, {1}, {2}, {3}, {4}\n".format("DATE: "+ strftime("%Y-%m-%d"), "TIME: " + strftime("%H:%M:%S"), str(temp_c) + " C", str(temp_f) + " F", str(hum) + "%"))
+		sleep(1)
